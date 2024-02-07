@@ -71,6 +71,11 @@ export class ChatUiComponent implements OnInit {
     })
   }
 
+  logout(){
+    localStorage.removeItem('username');
+    this.router.navigate(['/login']);
+  }
+
   changeChat(user){
     this.username = user
     
