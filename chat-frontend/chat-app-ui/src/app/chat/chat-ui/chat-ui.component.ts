@@ -34,6 +34,7 @@ export class ChatUiComponent implements OnInit {
       
       let channel = pusher.subscribe('chat');
       channel.bind('message', (data: any) => {
+        data.right = data.messageFrom == localStorage.getItem('username') ? true : false;
         data.timeStr = new Date(data.sentTime * 1000).toLocaleString('en-GB', { hour12:false } )
         this.messages.push(data)
       });
@@ -86,7 +87,8 @@ export class ChatUiComponent implements OnInit {
     this.http.get("http://localhost:3000/api/getMessagesByUsername?messageFrom="+messageFrom+"&messageTo="+messageTo).subscribe((data: any) => {
       this.messages = [...data.user1, ...data.user2];
       this.messages.forEach((ele) => {
-        ele.timeStr = new Date(ele.sentTime * 1000).toLocaleString('en-GB', { hour12:false } )
+        ele.right = ele.messageFrom == localStorage.getItem('username') ? true : false;
+        ele.timeStr = new Date(ele.sentTime * 1000).toLocaleString('en-GB', { hour12:false } );
       })
       this.messages.sort((a, b) => a.sentTime - b.sentTime);
       console.log(this.messages, "after get");
