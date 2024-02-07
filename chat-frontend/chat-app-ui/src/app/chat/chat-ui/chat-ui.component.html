@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <div
+      class="col-md-12 rounded my-2 d-flex align-items-center justify-content-center"
+      style="height: 100px; background-color: aquamarine"
+    >
+      <h3>{{ myName }}'s chat room</h3>
+    </div>
+    <!-- <div class="col-md-4 mx-1 rounded" style="height: 650px; background-color: aquamarine;" *ngFor="let user of users"> -->
+    <div
+      class="col-md-4 rounded"
+      style="height: 650px; background-color: aquamarine; "
+    >
+      <ul class="list-group" id="user-list" *ngFor="let user of users">
+        <li
+          class="list-group-item btn btn-primary"
+          style="background-color: wheat"
+          (click)="changeChat(user.username)"
+        >
+          {{ user.username | titlecase }}
+        </li>
+      </ul>
+    </div>
+
+    <div
+      class="col-md-8 row rounded"
+      id="messages"
+      style="height: 650px; background-color: aquamarine;"
+      *ngIf="!noData"
+    >
+    <div class="col-md-12" style=" overflow-y: scroll;  height:75vh;">
+      <div *ngFor="let msg of messages" class="mx-5">
+        <div class="row rounded w-100 mt-2" style="background-color: tomato; color: white;">
+          <div class="col-md-8">
+            {{ msg.messageFrom }}
+          </div>
+          <div class="col-md-4">
+                    <small>
+                        {{ msg.timeStr }}
+                    </small>
+                </div>
+          <div class="col-md-12">
+            {{ msg.message }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 row" id="message-bar">
+        <div class="col-md-10">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="write a message"
+            [(ngModel)]="message"
+          />
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary" (click)="submit()">send</button>
+        </div>
+      </div>
+    </div>
+      
+    </div>
+    <div
+      class="col-md-7 mx-1 rounded d-flex align-items-center justify-content-center"
+      style="height: 650px; background-color: aquamarine"
+      *ngIf="noData"
+    >
+      <div>
+        <h3>No chat open</h3>
+      </div>
+    </div>
+  </div>
+</div>

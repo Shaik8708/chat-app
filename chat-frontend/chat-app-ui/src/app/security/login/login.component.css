@@ -1,0 +1,22 @@
+.login-form-bg{
+    background-color: aquamarine;
+    height: 50vh;
+    width: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 5px;
+    border: 1px solid rgb(140, 140, 140) ;
+}
+
+.form{
+    height: 30vh;
+    width: 30vh;
+}
+
+.container{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

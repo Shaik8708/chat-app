@@ -1,0 +1,13 @@
+#messages{
+    position: relative;
+}
+
+#message-bar {
+    bottom: 2%;
+    width: 100%;
+    position: absolute;
+}
+
+#user-list {
+    margin-top: 2%;
+}
