@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import Pusher from 'pusher-js';
 
@@ -8,7 +8,9 @@ import Pusher from 'pusher-js';
   templateUrl: './chat-ui.component.html',
   styleUrls: ['./chat-ui.component.css']
 })
-export class ChatUiComponent implements OnInit {
+export class ChatUiComponent implements OnInit, AfterViewChecked  {
+
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   message ;
   username ;
@@ -20,7 +22,7 @@ export class ChatUiComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-
+    this.scrollToBottom()
     this.getAllUsers()
     if(!localStorage.getItem('username')){
       this.router.navigate(['/login'])
@@ -46,6 +48,16 @@ export class ChatUiComponent implements OnInit {
     }
 
   }
+
+  scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+  }
+
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+} 
 
   getAllUsers(){
     this.http.get("http://localhost:3000/api/getAllUsers").subscribe((data: any) => {

@@ -33,7 +33,7 @@
       style="height: 650px; background-color: aquamarine;"
       *ngIf="!noData"
     >
-    <div class="col-md-12" style=" overflow-y: scroll;  height:75vh;">
+    <div class="col-md-12" #scrollMe style=" overflow-y: scroll;  height:75vh;">
       <div *ngFor="let msg of messages" class="mx-5">
         <div class="row rounded w-75 my-2 float-end p-2" *ngIf="msg.right" style="background-color: tomato; color: white;">
           <!-- <div class="col-md-8">
